@@ -1,0 +1,94 @@
+{% extends "WityBundle:Default:layout.html.twig" %}
+
+{% block  main %}
+
+<body>
+
+
+	<h3>Demande de congés de M. {{ employeactuel.name}} </h3>
+	<div id='holiday-form'>
+		{{ form(form) }}
+	</div>
+
+
+
+	<h3>liste des congés demandés</h3>
+
+	<table>
+		<tr>
+			<td>Début du congé</td>
+			<td>Fin du congé</td>
+			<td>Statut de la demande</td>
+			<td>Commentaires</td>
+		</tr>
+		{% for holiday in currentholidays %}
+
+		<tr>
+			<td>{{ holiday.start|date('d/m/Y') }}</td>
+			<td>{{ holiday.end|date('d/m/Y') }}</td>
+			{% if holiday.status== true %}
+				<td> Validé</td>
+			{% else %}
+				<td> En attente</td>
+			{% endif %}
+			<td>{{ holiday.comment }}</td>
+			</tr>	
+
+
+		{% endfor %}
+
+	</table>
+
+		{% if employeactuel.status==1 %}
+
+
+			<h3>liste des congés en cours de validations</h3>
+
+			<table>
+				<tr>
+					<td>Début du congé</td>
+					<td>Fin du congé</td>
+					<td>id de l'employé</td>
+					<td>Commentaires</td>
+				</tr>
+				{% for pendingholiday in pendingholidays %}
+
+				<tr>
+					<td>{{ pendingholiday.start.date|date('d/m/Y') }}</td>
+					<td>{{ pendingholiday.end|date('d/m/Y') }}</td>
+					<td>{{ pendingholiday.employeeId }}</td>
+					<td>{{ pendingholiday.comment }}</td>
+					</tr>
+
+
+				{% endfor %}
+			</table>
+
+			<h3>liste des employés</h3>
+
+				<table>
+					<tr>
+						<td>Nom de l'employé</td>
+						<td>Id de l'employé</td>
+
+					</tr>
+					{% for employees in allemployees %}
+
+					<tr>
+						<td><a href="{{ path('wity_pending', {'id': employees.id}) }}">{{ employees.name }}</a></td>
+						<td>{{ employees.id }}</td>
+					</tr>
+
+
+					{% endfor %}
+				</table>
+
+
+		{% endif %}
+
+
+	</table>
+</body>
+
+
+{% endblock %}

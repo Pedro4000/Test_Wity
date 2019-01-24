@@ -1,0 +1,7 @@
+wity:
+    resource: "@WityBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation

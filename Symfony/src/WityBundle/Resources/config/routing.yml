@@ -1,0 +1,11 @@
+wity_homepage:
+    path:     /{id}
+    defaults: { _controller: WityBundle:Default:index }
+    requirements:
+        id: \d+
+
+wity_pending:
+    path:     /pending/{id}
+    defaults: { _controller: WityBundle:Default:admin }
+    requirements:
+        id: \d+

@@ -1,0 +1,27 @@
+{% extends "WityBundle:Default:layout.html.twig" %}
+
+{% block  main %}
+
+<body>
+
+	<h3>liste des congés validés</h3>
+
+	<table>
+		<tr>
+			<td>Début du congé</td>
+			<td>Fin du congé</td>
+			<td>Commentaires</td>
+		</tr>
+		{% for validholiday in allvalidholiday %}
+
+		<tr>
+			<td>{{ validholiday.start|date('d/m/Y') }}</td>
+			<td>{{ validholiday.end|date('d/m/Y') }}</td>
+			<td>{{ validholiday.comment }}</td>
+			</tr>	
+
+
+		{% endfor %}
+</body>
+
+{% endblock %}
